@@ -51,10 +51,6 @@ void floydwarshall(vector<vector<int> > &adj) {
                     matriz[i][j] = matriz[i][k] + matriz[k][j];
                 }
 
-                // if (matriz[i][k] + matriz[k][j] < matriz[i][j]) {
-                //     matriz[i][j] = matriz[i][k] + matriz[k][j];
-                // }
-
             }
         }
     }
