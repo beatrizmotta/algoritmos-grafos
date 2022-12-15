@@ -1,1 +1,1 @@
-void handle_flags(int argc, char**argv);
+void handle_flags(int argc, char** argv, int config[6][2]);
