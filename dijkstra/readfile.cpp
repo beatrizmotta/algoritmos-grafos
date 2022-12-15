@@ -21,6 +21,7 @@ int main(int argc, char**argv) {
         while (!file.eof()) {
             if (counter == 0) {
                 file >> vertices >> arestas;
+                adj.resize(vertices, vector<int> (vertices, 0));
                 counter++;
             }
             file >> u >> v >> peso; 
@@ -28,7 +29,14 @@ int main(int argc, char**argv) {
         }
     }
 
-    cout << vertices << " " << arestas;
+    cout << vertices << " " << arestas << "\n";
+
+    for (int i = 0; i < vertices; i++) {
+        for (int j = 0; j < vertices; j++) {
+            cout << adj[i][j] << " ";
+        }
+        cout << "\n";
+    }
 
     file.close(); 
     

@@ -1,10 +1,9 @@
 #include <iostream>
 #include <string>
-#include <cstdlib>
-#include <vector>
 
 using namespace std;
-void handle_flags(int argc, char** argv, int config[6][2]) {
+
+void change(int argc, char**argv, int config[6][2]) {
     string current_command;
     for (int i = 1; i < argc; i++)
     {
@@ -40,5 +39,19 @@ void handle_flags(int argc, char** argv, int config[6][2]) {
             config[3][0] = 1;
             config[3][1] = i + 1;
         }
+    }
+}
+
+int main(int argc, char **argv)
+{
+
+    int options[6][2];
+    change(argc, argv, options);
+
+    for (int i = 0; i < 6; i++) {
+        for (int j = 0; j < 2; j++) {
+            cout << options[i][j] << " "; 
+        }
+        cout << "\n";
     }
 }
