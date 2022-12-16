@@ -3,7 +3,7 @@
 #include <cstdio>
 
 using namespace std;
-int dijkstra(vector<vector<int> > &adj, int s);
+int dijkstra(vector<vector<int> > &adj, int s, int f);
 
 int main() {
     int vertices, edges; 
@@ -21,9 +21,12 @@ int main() {
 
     }
 
-    int fonte; 
+    int fonte, destino; 
     cout << "\nInsira vertice fonte:\n";
     cin >> fonte; 
+    cout << "Insira vertice destino:\n";
+    cin >> destino;
+
     // for (int i = 0; i < vertices; i++) {
     //     for (int j = 0; j < vertices; j++) {
     //         cout << adjacencia[i][j] << " ";
@@ -31,7 +34,7 @@ int main() {
     //     cout << "\n";
     // }
 
-    dijkstra(adjacencia, fonte);
+    dijkstra(adjacencia, fonte, destino);
 
     return 0;
 }
@@ -55,13 +58,21 @@ int min(vector<int> &dist, vector<bool> &visited) {
     return index; 
 
 }
+void printCaminho(vector<int> &pai, int final) {
+    if (pai[final] != final) {
+        printCaminho(pai, pai[final]);
+    }
+    cout << final << " ";
+}
 
-int dijkstra(vector<vector<int> > &adj, int s) {
+int dijkstra(vector<vector<int> > &adj, int s, int f) {
     int size = adj.size();
     vector<int> dist (size, INT_MAX); 
+    vector<int> pai (size, -1);
     vector<bool> visited (size, false); 
 
     dist[s] = 0; 
+    pai[s] = s;
 
     for (int i = 0; i < size; i++) {
         int m = min(dist, visited);
@@ -74,6 +85,10 @@ int dijkstra(vector<vector<int> > &adj, int s) {
                 && dist[m] + adj[m][j] < dist[j]
             ){
                 dist[j] = dist[m] + adj[m][j];
+                pai[j] = m; 
+    
+                // dist[adj[j][1]] = dist[adj[j][0]] + adj[j][2];
+                // pai[adj[j][1]] = adj[j][0]; 
             }
 
         }
@@ -90,5 +105,7 @@ int dijkstra(vector<vector<int> > &adj, int s) {
         }
         cout << '\n';
     }
+    cout << "Caminho de " << s << " ate " << f << ":\n";
+    printCaminho(pai, f);
 
 }
